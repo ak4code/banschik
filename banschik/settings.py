@@ -125,7 +125,7 @@ STATICFILES_DIRS = [
 ]
 
 MANIFEST_LOADER = {
-    'cache': DEBUG,
+    'cache': not DEBUG,
 }
 
 
