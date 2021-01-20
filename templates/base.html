@@ -1,0 +1,24 @@
+{% load manifest %}
+<!DOCTYPE html>
+<html class="no-js" lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Банщик</title>
+  <meta name="description" content="{% block description %}Банщик Темрюк{% endblock %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="{% manifest 'favicon.ico' %}"/>
+  {% manifest_match '*.css' '<link href="{match}" rel="preload" as="style">' %}
+  {% manifest_match '*.js' '<link href="{match}" rel="preload" as="script">' %}
+  {% manifest_match '*.css' '<link href="{match}" rel="stylesheet">' %}
+</head>
+<body>
+<div id="b-app">
+  <header id="b-header"></header>
+  {% block layout %}
+    <main id="b-main">{% block content %}{% endblock %}</main>
+  {% endblock %}
+  <footer id="b-footer"></footer>
+</div>
+{% manifest_match '*.js' '<script src="{match}"></script>' %}
+</body>
+</html>
