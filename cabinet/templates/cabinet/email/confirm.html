@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Потверждение аккаунта {{ user.email }} - {{ block.super }}{% endblock %}
+
+{% block content %}
+  {% if success %}
+    {{ user.email }}, ваш аккаунт потвержден!
+  {% else %}
+    Ошибка, неверный токен!
+  {% endif %}
+{% endblock %}

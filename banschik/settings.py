@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'manifest_loader',
     'django_email_verification',
     'cabinet.apps.CabinetConfig',
+    'cms.apps.CmsConfig',
 ]
 
 MIDDLEWARE = [
@@ -131,13 +132,13 @@ def verified_callback(user):
 
 
 EMAIL_VERIFIED_CALLBACK = verified_callback
-EMAIL_FROM_ADDRESS = 'noreply@aliasaddress.com'
-EMAIL_MAIL_SUBJECT = 'Confirm your email'
-EMAIL_MAIL_HTML = 'mail_body.html'
-EMAIL_MAIL_PLAIN = 'mail_body.txt'
+EMAIL_FROM_ADDRESS = 'noreply@banschikmagazin.ru'
+EMAIL_MAIL_SUBJECT = 'Потвердите свой адрес электроной почты.'
+EMAIL_MAIL_HTML = 'cabinet/email/mail_body.html'
+EMAIL_MAIL_PLAIN = 'cabinet/email/mail_body.txt'
 EMAIL_TOKEN_LIFE = 60 * 60
-EMAIL_PAGE_TEMPLATE = 'confirm_template.html'
-EMAIL_PAGE_DOMAIN = 'http://mydomain.com/'
+EMAIL_PAGE_TEMPLATE = 'cabinet/email/confirm.html'
+EMAIL_PAGE_DOMAIN = 'http://127.0.0.1:8000/'
 
 # For Django Email Backend
 if DEBUG:

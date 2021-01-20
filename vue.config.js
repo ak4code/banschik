@@ -1,11 +1,16 @@
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const {WebpackManifestPlugin} = require('webpack-manifest-plugin');
 
 module.exports = {
     css: {
         extract: true
     },
     filenameHashing: false,
+    chainWebpack: config => {
+        config.plugins.delete('html')
+        config.plugins.delete('preload')
+        config.plugins.delete('prefetch')
+    },
     configureWebpack: {
         plugins: [
             new CleanWebpackPlugin(),
