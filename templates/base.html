@@ -1,19 +1,62 @@
 {% load manifest %}
+{% load solo_tags %}
 <!DOCTYPE html>
 <html class="no-js" lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Банщик</title>
-  <meta name="description" content="{% block description %}Банщик Темрюк{% endblock %}">
+  <title>{% block title %}{% get_solo 'cms.Settings' as settings %}{{ settings.site_name }}{% endblock %}</title>
+  <meta name="description" content="{% block description %}{% get_solo 'cms.Settings' as settings %}{{ settings.site_name }}{% endblock %}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="{% manifest 'favicon.ico' %}"/>
+  <link rel="canonical" href="{{ request.build_absolute_uri }}">
   {% manifest_match '*.css' '<link href="{match}" rel="preload" as="style">' %}
   {% manifest_match '*.js' '<link href="{match}" rel="preload" as="script">' %}
   {% manifest_match '*.css' '<link href="{match}" rel="stylesheet">' %}
+  <meta name="yandex-verification" content="" />
+  <meta name="google-site-verification" content="">
 </head>
 <body>
 <div id="b-app">
-  <header id="b-header"></header>
+{% get_solo 'cms.Settings' as settings %}
+  <header id="b-header" uk-sticky="top: 100vh; animation: uk-animation-slide-top">
+    <div class="uk-container">
+      <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
+                <div class="uk-navbar-left uk-hidden@m">
+                    <ul class="uk-navbar-nav uk-text-uppercase uk-text-bold">
+                        <li>
+                            <a href="{% url 'home' %}" class="uk-padding-remove-left">
+                                <img src="{% manifest 'logo-dark.svg' %}" alt="{{ settings.site_name }}" style="height: 40px">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="uk-navbar-left uk-visible@m">
+                    <ul class="uk-navbar-nav">
+                        <li>
+                            <a href="{% url 'home' %}" class="uk-padding-remove-left">
+                                <img src="{% manifest 'logo-dark.svg' %}" alt="{{ settings.site_name }}" style="height: 40px">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="uk-navbar-right">
+                    <ul class="uk-navbar-nav uk-visible@m uk-text-uppercase uk-text-bold">
+                        <li style="border-right: 1px solid"><a
+                                href="tel:{{ settings.phone }}">{{ settings.phone }}</a></li>
+                        <li>
+                            <a href="/">
+                                CART
+                            </a>
+                        </li>
+                    </ul>
+                    <a class="uk-hidden@m" href="/">
+                        CART
+                    </a>
+                    <a class="uk-navbar-toggle uk-hidden@m" uk-navbar-toggle-icon uk-toggle href="#b-offcanvas"></a>
+                </div>
+            </nav>
+    </div>
+  </header>
   {% block layout %}
     <main id="b-main">{% block content %}{% endblock %}</main>
   {% endblock %}
