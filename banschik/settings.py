@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'solo',
     'manifest_loader',
     'django_email_verification',
+    'adminsortable',
     'cabinet.apps.CabinetConfig',
     'cms.apps.CmsConfig',
 ]
@@ -162,5 +163,8 @@ CACHES = {
 }
 
 SOLO_CACHE = 'default'
-SOLO_CACHE_TIMEOUT = 60*5  # 5 mins
+SOLO_CACHE_TIMEOUT = 60 * 5  # 5 mins
 SOLO_CACHE_PREFIX = 'solo'
+
+MENU_CACHE_KEY = 'menus'
+MENU_CACHE_TIMEOUT = 60 * 5

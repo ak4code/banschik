@@ -14,7 +14,7 @@ module.exports = {
     configureWebpack: {
         plugins: [
             new CleanWebpackPlugin(),
-            new WebpackManifestPlugin()
+            new WebpackManifestPlugin({})
         ]
     },
 
