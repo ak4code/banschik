@@ -6,7 +6,7 @@
 @import "~uikit/src/scss/mixins-theme.scss";
 
 // 3. Your custom mixin overwrites.
-//@import "theme/accordion-mixins.scss";
+@import "theme/mixins.scss";
 
 // 4. Import UIkit.
 @import "~uikit/src/scss/uikit-theme.scss";
@@ -20,6 +20,21 @@
 #b-header {
   background: #ffffffd9;
   z-index: 980;
+}
+
+#b-footer {
+  position: relative;
+  background-color: #15151b;
+  background: linear-gradient(#1e71b8, #1c4687);
+  z-index: 4;
+  min-height: 150px;
+
+  &::before {
+    @include b-waves('1e71b8');
+    top: -17px;
+    left: 0;
+    transform: rotate(180deg);
+  }
 }
 
 .b-home__slider {
@@ -46,14 +61,34 @@
       position: absolute;
       width: calc(100% - 80px);
       height: calc(100% - 80px);
-      background-position: 0 0, 0 0, 100% 0, 0 100%;
-      background-size: 3px 100%, 100% 3px, 3px 100%, 100% 3px;
-      background-repeat: no-repeat;
-      background-image: linear-gradient(0deg, white, white 25%, transparent 25%, transparent 75%, white 75%), // left
-      linear-gradient(90deg, white, white 25%, transparent 25%, transparent 75%, white 75%), // top
-      linear-gradient(180deg, white, white 25%, transparent 25%, transparent 75%, white 75%), // right
-      linear-gradient(270deg, white, white 25%, transparent 25%, transparent 75%, white 75%) // bottom
-    ;
+      @include border-corner(white);
     }
   }
+}
+
+.b-section__lead {
+  background-color: #491b03;
+  background: linear-gradient(#7c482b, #491b03);
+  color: wheat;
+  position: relative;
+  z-index: 10;
+  box-shadow: 0px -4px 20px rgba(0, 0, 0, 0.75);
+
+  h1 {
+    color: wheat;
+  }
+
+  &::before {
+    @include b-waves('7c482b');
+    top: -17px;
+    left: 0;
+    transform: rotate(180deg);
+  }
+
+  &::after {
+    @include b-waves('491b03');
+    bottom: -17px;
+    left: 0;
+  }
+
 }

@@ -1,19 +1,19 @@
 {% extends 'base.html' %}
-
+{% block title %}{{ settings.seo_title }}{% endblock %}
+{% block description %}{{ settings.seo_description }}{% endblock %}
 {% block content %}
-  <section class="b-home__slider">
-    <div class="shade">
-        <div class="corner uk-position-center"></div>
-    </div>
-  </section>
-  <div class="uk-container">
-    <h1>Hello!</h1>
-    <div class="wrap-test">
-      <p>Text in wrap.</p>
-      <test val="DJANGO"></test>
-      <div style="height: 1600px">
-          text
-      </div>
-    </div>
-  </div>
+    <section class="b-home__slider">
+        <div class="shade">
+            <div class="corner uk-position-center"></div>
+        </div>
+    </section>
+    <section class="b-section__lead uk-padding-small uk-padding-remove-horizontal uk-margin-bottom">
+        <div class="uk-container">
+            <div class="uk-card uk-card-body uk-card-small">
+                <h1 class="uk-h2 uk-text-center uk-text-bold">{{ settings.site_name }}</h1>
+                <div class="uk-text-center">{{ settings.site_description | linebreaks }}</div>
+            </div>
+        </div>
+    </section>
+    <div class="uk-container" style="min-height: 200px"></div>
 {% endblock %}

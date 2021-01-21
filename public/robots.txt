@@ -1,3 +1,4 @@
 User-agent: *
 Disallow: /email
 Disallow: /admin
+Disallow: /tinymce

@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'solo',
     'manifest_loader',
+    'tinymce',
     'django_email_verification',
     'adminsortable',
     'cabinet.apps.CabinetConfig',
@@ -168,3 +169,20 @@ SOLO_CACHE_PREFIX = 'solo'
 
 MENU_CACHE_KEY = 'menus'
 MENU_CACHE_TIMEOUT = 60 * 5
+
+TINYMCE_DEFAULT_CONFIG = {
+    'selector': 'textarea',
+    'theme': 'modern',
+    'plugins': 'link image preview codesample contextmenu table code lists textcolor colorpicker paste media',
+    'toolbar1': 'formatselect | fontselect | forecolor | backcolor | bold italic underline | alignleft aligncenter alignright alignjustify '
+                '| bullist numlist | outdent indent | table | link image | codesample | preview code | media',
+    'contextmenu': 'formats | link image',
+    'menubar': False,
+    'media_live_embeds': True,
+    'paste_as_text': True,
+    'valid_elements': '*[*]',
+    'inline': False,
+    'statusbar': True,
+    'width': 'auto',
+    'height': 400,
+}
