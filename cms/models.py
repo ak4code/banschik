@@ -1,5 +1,8 @@
 from django.conf import settings
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
+from django.urls import reverse
 from solo.models import SingletonModel
 from django.core.cache import cache
 from adminsortable.models import SortableMixin
@@ -25,6 +28,7 @@ class Settings(SEOBase, SingletonModel):
     site_name = models.CharField(max_length=255, verbose_name='Название сайта', default='Банщик')
     site_description = models.TextField(verbose_name='Описание сайта', default='Банщик всё для бань и саун!')
     phone = models.CharField(max_length=255, verbose_name='Телефон', default='+79991112233')
+    email = models.EmailField(verbose_name='Email', default='mail@mail.ru')
     address = models.TextField(verbose_name='Адрес', blank=True, default='')
     maintenance_mode = models.BooleanField(verbose_name='Режим обслуживания', default=False)
     home = models.OneToOneField('Page', verbose_name='Главная страница', blank=True, null=True,
@@ -70,8 +74,12 @@ class MenuItem(SortableMixin):
         ('_top', '_top'),
         ('_parent', '_parent'),
     )
-    name = models.CharField(max_length=255, verbose_name='Название')
-    url = models.CharField(max_length=255, verbose_name='Ссылка')
+    content_type = models.ForeignKey(ContentType, blank=True, null=True, on_delete=models.CASCADE,
+                                     verbose_name='Объект')
+    object_id = models.PositiveIntegerField(blank=True, null=True, verbose_name='ID объекта')
+    content_object = GenericForeignKey('content_type', 'object_id')
+    name = models.CharField(max_length=255, blank=True, null=True, verbose_name='Название')
+    url = models.CharField(max_length=255, blank=True, null=True, verbose_name='Ссылка')
     title = models.CharField(max_length=255, verbose_name='Подсказка', blank=True, null=True)
     target = models.CharField(
         max_length=10,
@@ -82,7 +90,12 @@ class MenuItem(SortableMixin):
     menu = models.ForeignKey('Menu', related_name='items', on_delete=models.CASCADE)
     position = models.PositiveIntegerField(default=0, editable=False, db_index=True)
 
+
     def save(self, *args, **kwargs):
+        if self.content_object:
+            if not self.name:
+                self.name = self.content_object.__str__()
+            self.url = self.content_object.get_absolute_url()
         cached_menus = cache.get(settings.MENU_CACHE_KEY)
         if cached_menus is not None:
             cache.delete(settings.MENU_CACHE_KEY)
@@ -90,6 +103,13 @@ class MenuItem(SortableMixin):
 
     def __str__(self):
         return f'{self.name} -> {self.url}'
+
+    @property
+    def link(self):
+        if self.content_object:
+            return self.content_object.get_absolute_url()
+        else:
+            return self.url or '#'
 
     class Meta:
         verbose_name = 'Пункт меню'
@@ -103,8 +123,10 @@ class Page(SEOBase):
     slug = models.CharField(max_length=255, blank=True, default=' ', verbose_name='ЧПУ ссылка', db_index=True)
 
     def get_absolute_url(self):
-        pass
-        # return reverse('core:page', args=[str(self.slug)])
+        return reverse('cms:page', args=[str(self.slug)])
+
+    def __str__(self):
+        return self.title
 
     def save(self, *args, **kwargs):
         self.slug = uuslug(self.title, instance=self)

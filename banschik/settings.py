@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'tinymce',
     'django_email_verification',
     'adminsortable',
+    'genericadmin',
     'cabinet.apps.CabinetConfig',
     'cms.apps.CmsConfig',
 ]
@@ -65,6 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cms.context_processors.menu'
             ],
         },
     },

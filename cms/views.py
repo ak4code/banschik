@@ -1,5 +1,5 @@
-from django.views.generic import TemplateView
-from cms.models import Settings
+from django.views.generic import TemplateView, DetailView
+from .models import Settings, Page
 
 
 class HomePage(TemplateView):
@@ -7,5 +7,13 @@ class HomePage(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['settings'] = Settings.get_solo()
+        try:
+            context['settings'] = Settings.get_solo()
+        except:
+            context['settings'] = []
+            print('No init base settings')
         return context
+
+
+class PageView(DetailView):
+    model = Page

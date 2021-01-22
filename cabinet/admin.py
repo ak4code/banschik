@@ -2,7 +2,9 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .forms import AccountCreationForm, AccountChangeForm
 from .models import Account
+from django.contrib.auth import apps
 
+apps.AuthConfig.verbose_name = 'Группы'
 
 @admin.register(Account)
 class AccountAdmin(UserAdmin):
@@ -15,7 +17,7 @@ class AccountAdmin(UserAdmin):
         ('Основные', {'fields': ('email', 'password')}),
         ('Настройки', {'fields': ('is_staff', 'is_active')}),
         ('Личные данные', {'fields': ('first_name', 'last_name', 'phone')}),
-        ('Права доступа', {'fields': ('groups', 'user_permissions')}),
+        ('Права доступа', {'classes': ('collapse',), 'fields': ('groups', 'user_permissions')}),
     )
     add_fieldsets = (
         (None, {
@@ -25,3 +27,4 @@ class AccountAdmin(UserAdmin):
     )
     search_fields = ('email',)
     ordering = ('email',)
+
