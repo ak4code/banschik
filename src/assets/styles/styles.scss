@@ -43,6 +43,7 @@
   background-color: $base-heading-color;
   background-image: url("https://banschikmagazin.ru/media/gallery/photos/slide-07.jpg");
   background-size: cover;
+  background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
 
@@ -91,4 +92,10 @@
     left: 0;
   }
 
+}
+
+.b-page {
+  .content {
+    font-size: 1.3rem;
+  }
 }
