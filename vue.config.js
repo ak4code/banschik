@@ -13,7 +13,7 @@ module.exports = {
     },
     configureWebpack: {
         plugins: [
-            new CleanWebpackPlugin(),
+            new CleanWebpackPlugin({cleanStaleWebpackAssets: false}),
             new WebpackManifestPlugin({})
         ]
     },

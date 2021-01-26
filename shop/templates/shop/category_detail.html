@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}{{ category.seo_title }} - {{ block.super }}{% endblock %}
+{% block description %}{{ category.seo_description }}{% endblock %}
+
+{% block content %}
+  <article class="b-page uk-margin-top uk-margin-large-bottom uk-container uk-card uk-card-body uk-card-default uk-border-rounded">
+    <header class="b-page__title__wrap">
+      <h1 class="b-page__title">{{ category.name }}</h1>
+    </header>
+    <div class="products">
+    <ul class="uk-list uk-list-striped">
+      {% for product in category.products.all %}
+        <li>{{ product.name }}</li>
+      {% endfor %}
+    </ul>
+    </div>
+    <div class="content">{{ category.description|safe }}</div>
+  </article>
+{% endblock %}

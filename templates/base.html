@@ -38,7 +38,7 @@
                 <img src="{% manifest 'logo-dark.svg' %}" alt="{{ settings.site_name }}" style="height: 40px">
               </a>
             </li>
-            {% for item in menu.main_menu.items.all %}
+            {% for item in menu.main.items.all %}
               <li><a href="{{ item.url }}">{{ item.name }}</a></li>
             {% endfor %}
           </ul>

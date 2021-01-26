@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'genericadmin',
     'cabinet.apps.CabinetConfig',
     'cms.apps.CmsConfig',
+    'shop.apps.ShopConfig',
 ]
 
 MIDDLEWARE = [
@@ -66,7 +67,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'cms.context_processors.menu'
+                'cms.context_processors.menu',
+                'shop.context_processors.categories',
             ],
         },
     },
@@ -188,3 +190,8 @@ TINYMCE_DEFAULT_CONFIG = {
     'width': 'auto',
     'height': 400,
 }
+
+if DEBUG:
+    INSTALLED_APPS.extend(['debug_toolbar', ])
+    MIDDLEWARE.extend(['debug_toolbar.middleware.DebugToolbarMiddleware', ])
+    INTERNAL_IPS = ['127.0.0.1', ]

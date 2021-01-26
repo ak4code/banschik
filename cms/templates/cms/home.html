@@ -6,6 +6,22 @@
         <div class="shade">
             <div class="corner uk-position-center"></div>
         </div>
+        <div class="slider">
+            <div class="uk-position-relative uk-light" tabindex="-1"
+                 uk-slideshow="min-height: 420; max-height: 440; animation: scale; autoplay: true; autoplay-interval: 2000; pause-on-hover: false">
+                <ul class="uk-slideshow-items">
+                    {% for category in categories %}
+                        <li>
+                            <a href="{% url 'shop:category' category.slug %}">
+                                <div class="uk-position-center uk-text-center">
+                                    <span class="slider__text">{{ category.name }}</span>
+                                </div>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
     </section>
     <section class="b-section__lead uk-padding-small uk-padding-remove-horizontal uk-margin-bottom">
         <div class="uk-container">
