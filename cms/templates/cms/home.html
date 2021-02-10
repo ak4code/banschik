@@ -12,7 +12,7 @@
                 <ul class="uk-slideshow-items">
                     {% for category in categories %}
                         <li>
-                            <a href="{% url 'shop:category' category.slug %}">
+                            <a href="{% url 'shop:category' category.slug %}" title="{{ category.name }}">
                                 <div class="uk-position-center uk-text-center">
                                     <span class="slider__text">{{ category.name }}</span>
                                 </div>

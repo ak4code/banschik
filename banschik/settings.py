@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django_email_verification',
     'adminsortable',
     'genericadmin',
+    'import_export',
     'cabinet.apps.CabinetConfig',
     'cms.apps.CmsConfig',
     'shop.apps.ShopConfig',
